@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My App'),
+          title: Text('My First App'),
         ),
-        body: Text('bruh'),
+        body: Text('Body Text'),
       ),
     );
   }
