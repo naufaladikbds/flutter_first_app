@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_app/answer.dart';
+import 'package:flutter_first_app/data.dart';
 import 'package:flutter_first_app/question.dart';
 
 void main(List<String> args) {
@@ -14,51 +16,52 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static const questionAndAnswer = quizData;
+
   int _questionIndex = 0;
+  bool isFinished = false;
 
   void _onPressAnswer() {
-    if (_questionIndex < questions.length - 1) {
+    if (_questionIndex < questionAndAnswer.length - 1) {
       setState(() {
         _questionIndex++;
       });
       print('here is the next question');
     } else {
+      isFinished = true;
+      setState(() {});
       print('No question left');
     }
   }
 
-  List questions = [
-    'First Question?',
-    'Second Question',
-    'Third Question',
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> ResultScreen = [];
+    // List<Widget> ResultScreen = [];
     print('Question index is $_questionIndex');
+    print('Question length is ${questionAndAnswer.length}');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text('E-Psychotest'),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(questions[_questionIndex]),
-            ElevatedButton(
-              onPressed: _onPressAnswer,
-              child: Text('Answer 1'),
-            ),
-            ElevatedButton(
-              onPressed: _onPressAnswer,
-              child: Text('Answer 2'),
-            ),
-            ElevatedButton(
-              onPressed: _onPressAnswer,
-              child: Text('Answer 3'),
-            ),
-          ],
-        ),
+        body: isFinished
+            ? Center(
+                child: Text("COMPLETE"),
+              )
+            : Column(
+                children: [
+                  Question(
+                    questionAndAnswer[_questionIndex]['question'] as String,
+                    questionAndAnswer[_questionIndex]['figure'],
+                  ),
+                  Answer(
+                    questionAndAnswer[_questionIndex]['answers'] as List,
+                    _onPressAnswer,
+                  ),
+                ],
+              ),
       ),
     );
   }
