@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_app/answer.dart';
 import 'package:flutter_first_app/data.dart';
 import 'package:flutter_first_app/question.dart';
+import 'package:flutter_first_app/quiz_screen.dart';
+import 'package:flutter_first_app/result_screen.dart';
 
 void main(List<String> args) {
   print('WEEEE');
@@ -19,24 +21,42 @@ class _MyAppState extends State<MyApp> {
   static const questionAndAnswer = quizData;
 
   int _questionIndex = 0;
+  List correctionDetail = [];
+  int _score = 0;
   bool isFinished = false;
 
-  void _onPressAnswer() {
+  void _onPressAnswer(String answerChosen) {
+    print("ANSWER CHOSEN ISSSSSS $answerChosen");
     if (_questionIndex < questionAndAnswer.length - 1) {
+      if (answerChosen == questionAndAnswer[_questionIndex]['answer']) {
+        _score++;
+      } else {
+        correctionDetail.add({
+          'no': _questionIndex + 1,
+          'question': questionAndAnswer[_questionIndex],
+          'user_answer': answerChosen,
+          'correct_answer': questionAndAnswer[_questionIndex]['answer'],
+        });
+      }
       setState(() {
         _questionIndex++;
       });
-      print('here is the next question');
+      print(correctionDetail);
     } else {
-      isFinished = true;
-      setState(() {});
-      print('No question left');
+      setState(() {
+        isFinished = true;
+      });
     }
+  }
+
+  void restart() {
+    setState(() {
+      _questionIndex = 0;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> ResultScreen = [];
     // List<Widget> ResultScreen = [];
     print('Question index is $_questionIndex');
     print('Question length is ${questionAndAnswer.length}');
@@ -46,21 +66,17 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('E-Psychotest'),
         ),
-        body: isFinished
-            ? Center(
-                child: Text("COMPLETE"),
+        body: _questionIndex > questionAndAnswer.length
+            ? ResultScreen(
+                _score,
+                correctionDetail,
+                questionAndAnswer.length,
+                restart,
               )
-            : Column(
-                children: [
-                  Question(
-                    questionAndAnswer[_questionIndex]['question'] as String,
-                    questionAndAnswer[_questionIndex]['figure'],
-                  ),
-                  Answer(
-                    questionAndAnswer[_questionIndex]['answers'] as List,
-                    _onPressAnswer,
-                  ),
-                ],
+            : QuizScreen(
+                questionAndAnswer,
+                _questionIndex,
+                _onPressAnswer,
               ),
       ),
     );

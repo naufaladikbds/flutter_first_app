@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
   final List answers;
-  final VoidCallback onPress;
+  final Function onPress;
 
   Answer(this.answers, this.onPress);
 
@@ -18,7 +18,7 @@ class Answer extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.blue,
                   ),
-                  onPressed: onPress,
+                  onPressed: () => onPress(answeritem),
                   child: Text(
                     answeritem,
                     style: TextStyle(color: Colors.white),
