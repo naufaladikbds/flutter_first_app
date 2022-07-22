@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_first_app/answer.dart';
 import 'package:flutter_first_app/question.dart';
 
@@ -13,14 +14,35 @@ class QuizScreen extends StatelessWidget {
     this._onPressAnswer,
   );
 
-  //TODO: quiz progress bar
+  //TODO: beautify progress bar
+
+  Color progressBar(currentIndex) {
+    if (_questionIndex >= currentIndex) {
+      return Color.fromARGB(255, 33, 184, 33);
+    } else {
+      return Color.fromARGB(255, 218, 218, 218);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 20,
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 20),
+          color: Color.fromARGB(255, 218, 218, 218),
+          height: 10,
+          child: Row(
+            children: [
+              ...List.generate(questionAndAnswer.length, (i) {
+                return Expanded(
+                  child: Container(
+                    color: progressBar(i),
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
         Question(
           questionAndAnswer[_questionIndex]['question'] as String,
