@@ -16,8 +16,8 @@ class QuizScreen extends StatelessWidget {
 
   //TODO: beautify progress bar
 
-  Color progressBar(currentIndex) {
-    if (_questionIndex >= currentIndex) {
+  Color progressBar(barIndex) {
+    if (_questionIndex >= barIndex) {
       return Color.fromARGB(255, 33, 184, 33);
     } else {
       return Color.fromARGB(255, 218, 218, 218);
@@ -30,13 +30,14 @@ class QuizScreen extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(vertical: 20),
-          color: Color.fromARGB(255, 218, 218, 218),
           height: 10,
           child: Row(
             children: [
               ...List.generate(questionAndAnswer.length, (i) {
                 return Expanded(
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 700),
+                    curve: Curves.easeOutQuad,
                     color: progressBar(i),
                   ),
                 );
