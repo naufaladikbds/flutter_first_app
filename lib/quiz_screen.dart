@@ -35,9 +35,7 @@ class QuizScreen extends StatelessWidget {
             children: [
               ...List.generate(questionAndAnswer.length, (i) {
                 return Expanded(
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 700),
-                    curve: Curves.easeOutQuad,
+                  child: Container(
                     color: progressBar(i),
                   ),
                 );

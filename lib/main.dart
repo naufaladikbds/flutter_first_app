@@ -51,6 +51,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _score = 0;
       _questionIndex = 0;
+      correctionDetail = [];
     });
   }
 
