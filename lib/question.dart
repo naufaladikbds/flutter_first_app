@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -12,20 +13,20 @@ class Question extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(top: 20, bottom: 10),
+      margin: EdgeInsets.only(top: 0, bottom: 10),
       child: Column(
         children: [
-          Container(
-            child: questionFigure != ''
-                ? Image.asset(
+          questionFigure != ''
+              ? Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Image.asset(
                     questionFigure,
                     gaplessPlayback: true,
-                  )
-                : null,
-          ),
-          Padding(
+                  ),
+                )
+              : Container(),
+          Container(
             padding: const EdgeInsets.only(
-              top: 16,
               left: 20,
               right: 20,
             ),

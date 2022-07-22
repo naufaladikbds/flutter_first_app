@@ -6,7 +6,6 @@ import 'package:flutter_first_app/quiz_screen.dart';
 import 'package:flutter_first_app/result_screen.dart';
 
 void main(List<String> args) {
-  print('WEEEE');
   runApp(MyApp());
 }
 
@@ -26,8 +25,7 @@ class _MyAppState extends State<MyApp> {
   bool isFinished = false;
 
   void _onPressAnswer(String answerChosen) {
-    print("ANSWER CHOSEN ISSSSSS $answerChosen");
-    if (_questionIndex < questionAndAnswer.length - 1) {
+    if (_questionIndex < questionAndAnswer.length) {
       if (answerChosen == questionAndAnswer[_questionIndex]['answer']) {
         _score++;
       } else {
@@ -40,8 +38,8 @@ class _MyAppState extends State<MyApp> {
       }
       setState(() {
         _questionIndex++;
+        print(_questionIndex);
       });
-      print(correctionDetail);
     } else {
       setState(() {
         isFinished = true;
@@ -51,6 +49,7 @@ class _MyAppState extends State<MyApp> {
 
   void restart() {
     setState(() {
+      _score = 0;
       _questionIndex = 0;
     });
   }
@@ -66,7 +65,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('E-Psychotest'),
         ),
-        body: _questionIndex > questionAndAnswer.length
+        body: _questionIndex > questionAndAnswer.length - 1
             ? ResultScreen(
                 _score,
                 correctionDetail,

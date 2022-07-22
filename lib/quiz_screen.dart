@@ -17,6 +17,9 @@ class QuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 20,
+        ),
         Question(
           questionAndAnswer[_questionIndex]['question'] as String,
           questionAndAnswer[_questionIndex]['figure'],
