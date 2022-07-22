@@ -9,23 +9,31 @@ class Answer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: answers
-            .map(
-              (answeritem) => Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 85),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                  ),
-                  onPressed: () => onPress(answeritem),
-                  child: Text(
-                    answeritem,
-                    style: TextStyle(color: Colors.white),
-                  ),
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 8),
+        ),
+        ...answers.map(
+          (answeritem) => Container(
+            width: double.infinity,
+            color: Colors.amber,
+            height: 40,
+            margin: EdgeInsets.only(bottom: 15),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+              ),
+              onPressed: () => onPress(answeritem),
+              child: Text(
+                answeritem,
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
-            )
-            .toList());
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

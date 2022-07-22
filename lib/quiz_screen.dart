@@ -13,6 +13,8 @@ class QuizScreen extends StatelessWidget {
     this._onPressAnswer,
   );
 
+  //TODO: quiz progress bar
+
   @override
   Widget build(BuildContext context) {
     return Column(

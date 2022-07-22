@@ -13,12 +13,12 @@ class Question extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(top: 0, bottom: 10),
+      margin: EdgeInsets.only(top: 0, bottom: 20),
       child: Column(
         children: [
           questionFigure != ''
               ? Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: EdgeInsets.only(bottom: 18),
                   child: Image.asset(
                     questionFigure,
                     gaplessPlayback: true,
