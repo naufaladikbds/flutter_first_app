@@ -26,32 +26,37 @@ class QuizScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 20),
-          height: 10,
-          child: Row(
-            children: [
-              ...List.generate(questionAndAnswer.length, (i) {
-                return Expanded(
-                  child: Container(
-                    color: progressBar(i),
-                  ),
-                );
-              }),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        alignment: Alignment.bottomCenter,
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              height: 10,
+              child: Row(
+                children: [
+                  ...List.generate(questionAndAnswer.length, (i) {
+                    return Expanded(
+                      child: Container(
+                        color: progressBar(i),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+            Question(
+              questionAndAnswer[_questionIndex]['question'] as String,
+              questionAndAnswer[_questionIndex]['figure'],
+            ),
+            Answer(
+              questionAndAnswer[_questionIndex]['choice'] as List,
+              _onPressAnswer,
+            ),
+          ],
         ),
-        Question(
-          questionAndAnswer[_questionIndex]['question'] as String,
-          questionAndAnswer[_questionIndex]['figure'],
-        ),
-        Answer(
-          questionAndAnswer[_questionIndex]['choice'] as List,
-          _onPressAnswer,
-        ),
-      ],
+      ),
     );
   }
 }
